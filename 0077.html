@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Organizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <nav class="navbar">
+            <h1>Event Organizer</h1>
+            <ul>
+                <li><a onclick="showPage('selection')">Start</a></li>
+            </ul>
+        </nav>
+
+        <div id="selection" class="page">
+            <h2>Select Your Role</h2>
+            <button onclick="showPage('teamChoice')" class="animated-button">You are an Organizer</button>
+            <button onclick="showPage('participantForm')" class="animated-button">Join as Participant</button>
+            <button onclick="showPage('brandForm')" class="animated-button">Join as Brand/Company Vendor & Sponsorship</button>
+        </div>
+
+        <div id="teamChoice" class="page hidden">
+            <h2>Organizer Options</h2>
+            <button onclick="showPage('createTeam')" class="animated-button">Create Team</button>
+            <button onclick="showPage('joinTeam')" class="animated-button">Join Team</button>
+        </div>
+
+        <div id="createTeam" class="page hidden">
+            <h2>Create a Team</h2>
+            <form id="createTeamForm">
+                <input type="text" placeholder="Full Name (Owner)" id="createFullName" required>
+                <input type="text" placeholder="Team Name" id="createTeamName" required>
+                <input type="password" placeholder="Set Team Password" id="createTeamPassword" required>
+                <input type="number" placeholder="Initial Budget" id="initialBudget" required>
+                <button type="button" onclick="createTeamAndJoin()" class="animated-button">Create</button>
+            </form>
+        </div>
+
+        <div id="joinTeam" class="page hidden">
+            <h2>Join a Team</h2>
+            <form id="joinTeamForm">
+                <input type="text" placeholder="Full Name" id="joinFullName" required>
+                <input type="text" placeholder="Team ID" id="joinTeamId" required>
+                <input type="password" placeholder="Team Password" id="joinTeamPassword" required>
+                <button type="button" onclick="joinTeamAndJoin()" class="animated-button">Join</button>
+            </form>
+        </div>
+
+        <div id="participantForm" class="page hidden">
+            <h2>Participant Registration</h2>
+            <form id="participantRegisterForm">
+                <input type="text" placeholder="Full Name" id="participantFullName" required>
+                <input type="email" placeholder="Email" id="participantEmail" required>
+                <input type="tel" placeholder="Phone" id="participantPhone" required>
+                <input type="password" placeholder="Password" id="participantPassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                <button type="button" onclick="registerParticipant()">Register</button>
+            </form>
+        </div>
+
+        <div id="brandForm" class="page hidden">
+            <h2>Brand/Vendor Registration</h2>
+            <form id="brandRegisterForm">
+                <input type="text" placeholder="Company Name" id="brandCompanyName" required>
+                <input type="text" placeholder="Contact Person" id="brandContactName" required>
+                <input type="email" placeholder="Email" id="brandEmail" required>
+                <input type="tel" placeholder="Phone" id="brandPhone" required>
+                <input type="password" placeholder="Password" id="brandPassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                <button type="button" onclick="registerBrand()">Register</button>
+            </form>
+        </div>
+
+        <div id="chatInterface" class="hidden chat-container">
+            <div class="sidebar">
+                <h3>Chat Rooms</h3>
+                <ul id="chatRooms"></ul>
+                <div id="adminControls" class="hidden">
+                    <h3>Admin Controls</h3>
+                    <input type="text" id="newRoomName" placeholder="New Room Name">
+                    <button onclick="createRoom()">Create Room</button>
+                    <button onclick="showPage('manageMembers')">Manage Members</button>
+                    <button onclick="showPage('manageBudget')">Manage Budget</button>
+                </div>
+            </div>
+            <div class="chat-room">
+                <div class="messages" id="chatMessages">
+                    <p><strong>System:</strong> Select a chat room to start</p>
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chatInput" placeholder="Type a message...">
+                    <button onclick="sendMessage()" class="animated-button">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="manageMembers" class="page hidden">
+            <h2>Manage Members (WIP)</h2>
+            <p>Assign Roles, Remove Members (Coming Soon)</p>
+            <button onclick="showPage('chatInterface')">Back to Chat</button>
+        </div>
+
+        <div id="manageBudget" class="page hidden">
+            <h2>Manage Budget (WIP)</h2>
+            <p>Track Expenses, Add Income (Coming Soon)</p>
+            <div id="budgetSummary">
+                <p>Initial Budget: <span id="initialBudgetValue">0</span></p>
+                <p>Current Budget: <span id="currentBudgetValue">0</span></p>
+            </div>
+            <button onclick="showPage('chatInterface')">Back to Chat</button>
+        </div>
+
+    </div>
+    <div> </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
